@@ -1,5 +1,8 @@
+import preAOC_test
+
+
 def main():
-    print("Hello from python-aoc25!")
+    preAOC_test.test_read_file()
 
 
 if __name__ == "__main__":
