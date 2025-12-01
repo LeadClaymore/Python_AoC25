@@ -1,8 +1,8 @@
-import preAOC_test
+import d1
 
 
 def main():
-    preAOC_test.test_read_file()
+    d1.dayone()
 
 
 if __name__ == "__main__":
