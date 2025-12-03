@@ -25,9 +25,33 @@ def partone():
 
 
 def parttwo():
+    _debug = False
     data = []
-    with open("data/a1.txt", "r") as file:
+    ans = 0
+    with open("data/d3.txt", "r") as file:
         data = file.read().splitlines()
 
-    for ee in data:
-        print(ee)
+    for ln in data:
+        if _debug:
+            print(ln)
+        inx = list(range(len(ln) - 12, len(ln)))
+        pnt = -1
+        if _debug:
+            print(inx)
+        for xx in range(12):
+            for ii in range(pnt + 1, inx[xx] + 1):
+                if int(ln[ii]) >= int(ln[inx[xx]]):
+                    if ii > inx[xx] and int(ln[ii]) == int(ln[inx[xx]]):
+                        continue
+
+                    pnt = ii
+                    inx[xx] = ii
+        if _debug:
+            print(inx)
+        fn = ""
+        for xx in inx:
+            fn += ln[xx]
+        ans += int(fn)
+        if _debug:
+            print(fn)
+    print(ans)
