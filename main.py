@@ -1,8 +1,10 @@
-import d1
+# import d1
+import d2
 
 
 def main():
-    d1.dayone()
+    # d2.partone()
+    d2.parttwo()
 
 
 if __name__ == "__main__":

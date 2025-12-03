@@ -3,7 +3,7 @@ import re
 
 def dayone():
     data = []
-    with open("data/d1.txt", "r") as file:
+    with open("data/a1.txt", "r") as file:
         data = file.read().splitlines()
 
     for ee in data:
