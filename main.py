@@ -1,10 +1,10 @@
 # import d1
-import d2
-
+# import d2
+import d3
 
 def main():
-    # d2.partone()
-    d2.parttwo()
+    d3.partone()
+    # d3.parttwo()
 
 
 if __name__ == "__main__":
