@@ -1,5 +1,11 @@
 # import re
 
+# dirs visualized
+# 0 1 2
+# 7 x 3
+# 6 5 4
+dirs = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
+
 
 def partone():
     _debug = True

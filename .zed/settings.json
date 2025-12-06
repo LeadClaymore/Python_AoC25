@@ -1,0 +1,7 @@
+{
+  "show_completions_on_input": true,
+  "features": {
+    "edit_prediction_provider": "none"
+  },
+  "show_edit_predictions": false
+}
