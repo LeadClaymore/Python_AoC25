@@ -3,9 +3,9 @@
 # import d3
 # import d4
 # import d5
-import d6
+# import d6
+import d7
 
-# import d7
 # import d8
 # import d9
 # import d10
@@ -14,8 +14,8 @@ import d6
 
 
 def main():
-    # d6.partone()
-    d6.parttwo()
+    # d7.partone()
+    d7.parttwotrytwo()
 
 
 if __name__ == "__main__":

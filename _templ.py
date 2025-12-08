@@ -8,6 +8,7 @@ dirs = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
 
 
 def partone():
+    _ans = 0
     _debug = True
     data = []
     with open("data/t#.txt", "r") as file:
@@ -19,6 +20,7 @@ def partone():
 
 
 def parttwo():
+    _ans = 0
     _debug = True
     data = []
     with open("data/t#.txt", "r") as file:
