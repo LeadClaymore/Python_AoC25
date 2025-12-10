@@ -55,7 +55,7 @@ def partone():
     data = []
     jbs: dict[int, jb] = {}
 
-    with open("data/t8.txt", "r") as file:
+    with open("data/d8.txt", "r") as file:
         data = file.read().splitlines()
 
     cnt = 0
@@ -74,7 +74,7 @@ def partone():
             print("ERROR")
             return
 
-    for _count in range(9):
+    for _count in range(999):
         min_dist = inf
         lhs, rhs = (-1, -1)
         for ee in jbs.values():
@@ -87,7 +87,9 @@ def partone():
                 if temp < min_dist:
                     lhs, rhs = (ee.id, ff.id)
                     min_dist = temp
-
+        if min_dist == inf:
+            print("error: ran out of connections")
+            return
         to_update = jbs[lhs].cmb(jbs[rhs])
         for uu in to_update:
             jbs[uu].cmb(jbs[lhs])
@@ -98,6 +100,29 @@ def partone():
     if _debug:
         for ee in jbs.values():
             print(ee)
+
+    ans_sets: list[set[int]] = []
+    for ee in jbs:
+        in_set = False
+        for aa in ans_sets:
+            if aa == jbs[ee].c:
+                in_set = True
+        if not in_set:
+            ans_sets.append(jbs[ee].c)
+
+    while len(ans_sets) > 3:
+        smallest_set = 0
+        for ii in range(1, len(ans_sets)):
+            if len(ans_sets[ii]) < len(ans_sets[smallest_set]):
+                smallest_set = ii
+        ans_sets.pop(smallest_set)
+
+    ans = 1
+    for ee in ans_sets:
+        print(ans, "\t", ee, len(ee))
+        ans *= len(ee)
+
+    print(ans)
 
 
 def parttwo():
