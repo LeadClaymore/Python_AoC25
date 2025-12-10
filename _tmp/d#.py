@@ -10,11 +10,11 @@ dirs = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
 def partone():
     _ans = 0
     _debug = True
-    data = []
+    fileo = []
     with open("data/t#.txt", "r") as file:
-        data = file.read().splitlines()
+        fileo = file.read().splitlines()
 
-    for ee in data:
+    for ee in fileo:
         if _debug:
             print(ee)
 
@@ -22,10 +22,10 @@ def partone():
 def parttwo():
     _ans = 0
     _debug = True
-    data = []
+    fileo = []
     with open("data/t#.txt", "r") as file:
-        data = file.read().splitlines()
+        fileo = file.read().splitlines()
 
-    for ee in data:
+    for ee in fileo:
         if _debug:
             print(ee)
