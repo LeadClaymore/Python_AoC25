@@ -18,6 +18,8 @@ def partone():
         if _debug:
             print(ee)
 
+    print("ans: ", _ans)
+
 
 def parttwo():
     _ans = 0
@@ -29,3 +31,5 @@ def parttwo():
     for ee in fileo:
         if _debug:
             print(ee)
+
+    print("ans: ", _ans)

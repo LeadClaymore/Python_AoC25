@@ -5,18 +5,17 @@
 # import d5
 # import d6
 # import d7
-import d8
+# import d8
+import d9
 
-# import d9
 # import d10
 # import d11
 # import d12
 
 
 def main():
-    # d8.partone()
-    d8.partonetrytwo()
-    d8.parttwo()
+    d9.partone()
+    # d9.parttwo()
 
 
 if __name__ == "__main__":
