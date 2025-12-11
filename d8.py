@@ -125,9 +125,185 @@ def partone():
     print(ans)
 
 
+class con:
+    dist: float
+    lhs: int
+    rhs: int
+
+    def __init__(self, ndist: float, nlhs: int, nrhs: int) -> None:
+        self.dist = ndist
+        self.lhs = nlhs
+        self.rhs = nrhs
+
+    def __str__(self) -> str:
+        return f"<{self.lhs} -{self.dist}- {self.rhs}>"
+
+
+def partonetrytwo():
+    _ans = 0
+    _debug = False
+    data = []
+    jbs: dict[int, jb] = {}
+    circuts: list[list[int]] = []
+    conn: list[con] = []
+
+    with open("data/d8.txt", "r") as file:
+        data = file.read().splitlines()
+
+    cnt = 0
+    for ee in data:
+        cnt += 1
+
+        pat = re.compile(r"^(\d+),(\d+),(\d+)$")
+        m = pat.match(ee)
+
+        if m:
+            a, b, c = map(int, m.groups())
+            if _debug:
+                print(f"a:{a},b:{b},c:{c}")
+            jbs[cnt] = jb(cnt, a, b, c)
+        else:
+            print("ERROR")
+            return
+
+    used = set()
+    for ee in jbs.values():
+        for ff in jbs.values():
+            if ee.id == ff.id or used.__contains__(ff):
+                continue
+            tdist = ee.dist(ff)
+            # print(f"{ee.id}, {ff.id}, {tdist}")
+            conn.append(con(tdist, ee.id, ff.id))
+        used.add(ee)
+    # this sorts the connections list
+    # for cc in conn:
+    #     print(cc)
+    conn.sort(key=lambda c: c.dist)
+    # if _debug:
+    #     for cc in conn:
+    #         print(cc)
+
+    for ii in jbs.keys():
+        circuts.append([ii])
+
+    for cc in range(1000):
+        if _debug:
+            print(f"conn {conn[cc]}")
+        ind = (conn[cc].lhs, conn[cc].rhs)
+        con_ind = [-1, -1]
+        for ii in range(2):
+            for ee in range(len(circuts)):
+                if circuts[ee].__contains__(ind[ii]):
+                    con_ind[ii] = ee
+                    break
+
+        if _debug:
+            print(con_ind, len(circuts))
+        if con_ind[0] == -1 or con_ind[1] == -1:
+            print(f"ERROR: could not find {ind[0]} or {ind[1]}")
+            return
+        elif con_ind[0] == con_ind[1]:
+            continue
+        temp_list = []
+        if con_ind[0] > con_ind[1]:
+            temp_list.extend(circuts.pop(con_ind[0]))
+            temp_list.extend(circuts.pop(con_ind[1]))
+        else:
+            temp_list.extend(circuts.pop(con_ind[1]))
+            temp_list.extend(circuts.pop(con_ind[0]))
+        circuts.append(temp_list)
+        if _debug:
+            print(f"{cc}, new combined list {temp_list}")
+
+    circuts.sort(key=lambda lst: -len(lst))
+    ans = len(circuts[0]) * len(circuts[1]) * len(circuts[2])
+    print("ans: ", ans)
+    return
+
+
 def parttwo():
     _ans = 0
-    _debug = True
+    _debug = False
     data = []
-    with open("data/t8.txt", "r") as file:
+    jbs: dict[int, jb] = {}
+    circuts: list[list[int]] = []
+    conn: list[con] = []
+
+    with open("data/d8.txt", "r") as file:
         data = file.read().splitlines()
+
+    cnt = 0
+    for ee in data:
+        cnt += 1
+
+        pat = re.compile(r"^(\d+),(\d+),(\d+)$")
+        m = pat.match(ee)
+
+        if m:
+            a, b, c = map(int, m.groups())
+            if _debug:
+                print(f"a:{a},b:{b},c:{c}")
+            jbs[cnt] = jb(cnt, a, b, c)
+        else:
+            print("ERROR")
+            return
+
+    used = set()
+    for ee in jbs.values():
+        for ff in jbs.values():
+            if ee.id == ff.id or used.__contains__(ff):
+                continue
+            tdist = ee.dist(ff)
+            # print(f"{ee.id}, {ff.id}, {tdist}")
+            conn.append(con(tdist, ee.id, ff.id))
+        used.add(ee)
+    # this sorts the connections list
+    # for cc in conn:
+    #     print(cc)
+    conn.sort(key=lambda c: c.dist)
+    # if _debug:
+    #     for cc in conn:
+    #         print(cc)
+
+    for ii in jbs.keys():
+        circuts.append([ii])
+
+    # for ee in conn:
+    #     print(ee)
+    # return
+
+    last_con = -1
+    for cc in range(len(conn)):
+        if _debug:
+            print(f"conn {conn[cc]}")
+        ind = (conn[cc].lhs, conn[cc].rhs)
+        con_ind = [-1, -1]
+        for ii in range(2):
+            for ee in range(len(circuts)):
+                if circuts[ee].__contains__(ind[ii]):
+                    con_ind[ii] = ee
+                    break
+
+        if _debug:
+            print(con_ind, len(circuts))
+        if con_ind[0] == -1 or con_ind[1] == -1:
+            print(f"ERROR: could not find {ind[0]} or {ind[1]}")
+            return
+        elif con_ind[0] == con_ind[1]:
+            continue
+
+        last_con = cc
+        temp_list = []
+        if con_ind[0] > con_ind[1]:
+            temp_list.extend(circuts.pop(con_ind[0]))
+            temp_list.extend(circuts.pop(con_ind[1]))
+        else:
+            temp_list.extend(circuts.pop(con_ind[1]))
+            temp_list.extend(circuts.pop(con_ind[0]))
+        circuts.append(temp_list)
+        if _debug:
+            print(f"{cc}, new combined list {temp_list}")
+
+    _ans = jbs[conn[last_con].lhs].x * jbs[conn[last_con].rhs].x
+    print(f"ans: {_ans}, {conn[last_con]}")
+    return

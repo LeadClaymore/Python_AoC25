@@ -14,7 +14,8 @@ import d8
 
 
 def main():
-    d8.partone()
+    # d8.partone()
+    d8.partonetrytwo()
     d8.parttwo()
 
 
